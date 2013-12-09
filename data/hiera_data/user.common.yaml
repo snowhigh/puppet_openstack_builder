@@ -78,6 +78,3 @@ ceph_public_network: '10.0.0.0/24'
 #cobbler::ucsm_port: '443'
 #cobbler::dhcp_service: 'dnsmasq'
 #cobbler::dns_service: 'dnsmasq'
-
-
-
