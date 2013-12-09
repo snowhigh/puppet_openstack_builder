@@ -3,6 +3,7 @@ classes:
   - apache::mod::proxy
   - apache::mod::wsgi
   - apache::mod::proxy_http
+  - cobbler
   - naginator
   - collectd
   # - coi::profiles::cobbler_server
