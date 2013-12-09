@@ -15,7 +15,7 @@ node-global:
   power-type: "ipmitool"
   power-user: "admin"
   power-pass: "password"
-  kickstart: "/etc/cobbler/preseeds/cisco-preseed"
+  kickstart: "/etc/cobbler/preseed/cisco-preseed"
   kopts: "netcfg/get_nameservers=2.4.1.254 \
 netcfg/confirm_static=true \
 netcfg/get_ipaddress={$eth0_ip-address} \
