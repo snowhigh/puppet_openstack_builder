@@ -1,3 +1,5 @@
+preseed:
+
 profile:
   name: "precise"
   arch: "x86_64"
