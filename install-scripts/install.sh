@@ -8,6 +8,9 @@ set -x
 set -e
 set -e
 
+# Default to using the Cisco install
+export vendor=cisco
+
 # Install type to use to get the puppet modules
 # Options: git(default) or deb
 export install_type= "${install_type:-git}"
