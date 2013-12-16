@@ -127,7 +127,7 @@ control-server01:
     eth0:
       mac-address: "aa:bb:cc:d2:ee:ff"
       dns-name: "control-server01.cisco.com"
-      ip-address: "192.168.242.1110"
+      ip-address: "192.168.242.110"
       static: "0"
       
 control-server02:
