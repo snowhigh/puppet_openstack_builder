@@ -9,13 +9,8 @@ set -e
 set -e
 
 # Default to using the Cisco install.
-# To override this, set vendor=stackforge in your
-# shell environment before running the script.
-if [[ -z "$vendor" ]]; then
-  echo "Using vendor=$vendor which was set in your shell environment."
-else
-  export vendor=cisco
-fi
+# To override this, comment out the next line
+export vendor=cisco
 
 # Install type to use to get the puppet modules
 # Options: git(default) or deb
