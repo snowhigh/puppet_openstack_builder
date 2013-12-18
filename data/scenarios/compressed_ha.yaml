@@ -2,6 +2,12 @@
 # 3 node compressed ha
 #
 roles:
+  build:
+    classes:
+      - coe::base
+    class_groups:
+      - test_file
+      - build
   compressed_ha:
     classes:
       - coe::base
