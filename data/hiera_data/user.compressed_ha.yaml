@@ -54,7 +54,10 @@ swift_hash: swift_secret
 galera::server::wsrep_sst_password: wsrep_password
 galera::monitor::monitor_password: monitor_pass
 glance::backend::swift::swift_store_key: swift_pass
+
+# rabbitmq settings
 rabbitmq::server::config_mirrored_queues: true
+rabbitmq::server::config_cluster: true
 
 #
 # HA connections
