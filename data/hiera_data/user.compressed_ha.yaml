@@ -3,20 +3,22 @@
 #
 
 ntp_servers:
-  - compute04.dmz-pod2.lab
+  - build-server.domain.name
 
 build_node_name: build-server.domain.name
 domain_name: domain.name
 
 coe::base::controller_hostname: node01
 
-controller_internal_address: 192.168.255.191
-controller_public_address: 192.168.255.191
-controller_admin_address: 192.168.255.191
+# These are controller VIPs
+controller_internal_address: 192.168.255.40
+controller_public_address: 192.168.255.40
+controller_admin_address: 192.168.255.40
 
-swift_internal_address: 192.168.220.60
-swift_public_address: 192.168.220.60
-swift_admin_address: 192.168.220.60
+# these are swift proxy VIPs
+swift_internal_address: 192.168.255.60
+swift_public_address: 192.168.255.60
+swift_admin_address: 192.168.255.60
 
 # maps to ovs local_ip from the gre data mappings
 internal_ip: "%{ipaddress_eth0}"
@@ -28,7 +30,7 @@ private_interface: eth0
 swift_storage_interface: eth0.222
 swift_storage_netmask: 255.255.255.0
 swift_proxy_net_ip: "%{ipaddress_eth0}"
-swift_local_net_ip: "%{ipaddress_eth0}"
+swift_local_net_ip: "%{ipaddress_eth0_222}"
 
 nova::compute::vncserver_proxyclient_address: "%{ipaddress_eth0}"
 
