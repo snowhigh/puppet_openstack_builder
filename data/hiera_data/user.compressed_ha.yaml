@@ -60,6 +60,7 @@ glance::backend::swift::swift_store_key: swift_pass
 # rabbitmq settings
 rabbitmq::server::config_mirrored_queues: true
 rabbitmq::server::config_cluster: true
+rabbitmq::server::node_ip_address: "%{ipaddress_eth0}"
 
 #
 # HA connections
