@@ -93,6 +93,7 @@ rabbit_hosts:
   - node02:5672
   - node03:5672
 bind_address: "%{ipaddress_eth0}"
+horizon::bind_address: "%{ipaddress_eth0}"
 
 cinder::volume::iscsi::iscsi_ip_address: "%{ipaddress_eth0}"
 
