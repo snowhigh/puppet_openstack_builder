@@ -31,6 +31,7 @@ allowed_hosts:
   - quantum::db::mysql::allowed_hosts
   - neutron::db::mysql::allowed_hosts
 bind_address:
+  - horizon::bind_address
   - horizon::cache_server_ip
   - cinder::api::bind_host
   - glance::registry::bind_host
@@ -44,6 +45,7 @@ bind_address:
   - quantum::bind_host
   - neutron::bind_host
   - openstack::swift::proxy::swift_proxy_net_ip
+  - nova::vncproxy::host
 "mysql://cinder:%{cinder_db_password}@%{controller_internal_address}/cinder?charset=utf8":
   - cinder::sql_connection
 "mysql://glance:%{glance_db_password}@%{controller_internal_address}/glance":
