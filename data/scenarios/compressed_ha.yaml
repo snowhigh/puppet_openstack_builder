@@ -22,3 +22,33 @@ roles:
       - compute
       - provider_network_controller
       - test_file
+  compressed_ha_cephall:
+    classes:
+      - coe::base
+      - naginator::control_target
+      - coe::network::interface
+      - openstack-ha::load-balancer
+      - cinder::setup_test_volume
+      #- openstack::swift::proxy
+      #- openstack::swift::storage-node
+    class_groups:
+      - controller
+      - compute
+      - provider_network_controller
+      - ceph_all
+      - test_file
+  compressed_ha_cephosd:
+    classes:
+      - coe::base
+      - naginator::control_target
+      - coe::network::interface
+      - openstack-ha::load-balancer
+      - cinder::setup_test_volume
+      #- openstack::swift::proxy
+      #- openstack::swift::storage-node
+      - cephdeploy::osdwrapper
+    class_groups:
+      - controller
+      - compute
+      - provider_network_controller
+      - test_file
