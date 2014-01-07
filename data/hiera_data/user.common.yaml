@@ -1,3 +1,6 @@
+# For proxy service if necessary.
+#proxy: 'http://proxy-server.domain.com:8080'
+
 domain_name: domain.name
 ntp_servers:
   - time-server.domain.name
