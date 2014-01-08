@@ -12,7 +12,3 @@ cobbler::dns_service: 'dnsmasq'
 cobbler::ubuntu::preseed::cobbler_proxy: 'http://10.0.2.15:3142'
 cobbler::ubuntu::preseed::time_zone: 'UTC'
 cobbler::ubuntu::preseed::autostart_puppet: true
-cobbler::ubuntu::preseed::root_part_size: 65536
-cobbler::ubuntu::preseed::var_part_size: 432000
-cobbler::ubuntu::preseed::enable_var: true
-cobbler::ubuntu::preseed::enable_vol_space: true
