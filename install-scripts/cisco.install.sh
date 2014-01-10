@@ -3,7 +3,7 @@
 
 # These 5 are needed to use the Cisco COI repos
 export vendor_repo=CiscoSystems
-export vendor_branch=coi-development
+export vendor_branch=master
 export FACTER_vendor=cisco
 export FACTER_vendorrepo=coi
 export FACTER_vendorpuppet=vendor
@@ -15,8 +15,8 @@ export install_type=deb
 # Add Cisco repo
 cat > /etc/apt/sources.list.d/cisco-openstack-mirror_havana.list<<EOF
 # cisco-openstack-mirror_havana
-deb http://openstack-repo.cisco.com/openstack/cisco havana-proposed main
-deb-src http://openstack-repo.cisco.com/openstack/cisco havana-proposed main
+deb http://openstack-repo.cisco.com/openstack/cisco havana main
+deb-src http://openstack-repo.cisco.com/openstack/cisco havana main
 EOF
 
 echo "-----BEGIN PGP PUBLIC KEY BLOCK-----
