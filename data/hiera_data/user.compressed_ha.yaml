@@ -3,23 +3,25 @@
 #
 
 ntp_servers:
-  - build-server.dmz-pod2.lab
+  - build-server.domain.name
 
-build_node_name: build-server.dmz-pod2.lab
-domain_name: dmz-pod2.lab
+build_node_name: build-server.domain.name
+domain_name: domain.name
 
-coe::base::controller_hostname: control
+coe::base::controller_hostname: node01
 
-controller_internal_address: 192.168.220.40
-controller_public_address: 192.168.220.40
-controller_admin_address: 192.168.220.40
+# These are controller VIPs
+controller_internal_address: 192.168.255.40
+controller_public_address: 192.168.255.40
+controller_admin_address: 192.168.255.40
 
-swift_internal_address: 192.168.220.60
-swift_public_address: 192.168.220.60
-swift_admin_address: 192.168.220.60
+# these are swift proxy VIPs
+swift_internal_address: 192.168.255.60
+swift_public_address: 192.168.255.60
+swift_admin_address: 192.168.255.60
 
 # maps to ovs local_ip from the gre data mappings
-internal_ip: "%{ipaddress_eth3}"
+internal_ip: "%{ipaddress_eth0}"
 external_interface: eth1
 public_interface: eth1
 private_interface: eth0
@@ -55,34 +57,42 @@ galera::server::wsrep_sst_password: wsrep_password
 galera::monitor::monitor_password: monitor_pass
 glance::backend::swift::swift_store_key: swift_pass
 
+# rabbitmq settings
+rabbitmq::server::config_mirrored_queues: true
+rabbitmq::server::config_cluster: true
+rabbitmq::server::node_ip_address: "%{ipaddress_eth0}"
+
 #
 # HA connections
 #
 controller_names:
-  - control01
-  - control02
-  - control03
+  - node01
+  - node02
+  - node03
 openstack-ha::load-balancer::controller_ipaddresses:
-  - 192.168.220.41
-  - 192.168.220.42
-  - 192.168.220.43
+  - 192.168.255.191
+  - 192.168.255.195
+  - 192.168.255.197
 openstack-ha::load-balancer::swift_proxy_names:
-  - swift-proxy01
-  - swift-proxy02
+  - node01
+  - node02
+  - node03
 openstack-ha::load-balancer::swift_proxy_ipaddresses:
-  - 192.168.220.61
-  - 192.168.220.62
+  - 192.168.255.191
+  - 192.168.255.195
+  - 192.168.255.197
 nova::memcached_servers:
-  - 192.168.220.41:11211
-  - 192.168.220.42:11211
-  - 192.168.220.43:11211
+  - 192.168.255.191:11211
+  - 192.168.255.195:11211
+  - 192.168.255.197:11211
 openstack::swift::proxy::swift_memcache_servers:
-  - 192.168.222.61:11211
-  - 192.168.222.62:11211
+  - 192.168.255.191:11211
+  - 192.168.255.195:11211
+  - 192.168.255.197:11211
 rabbit_hosts:
-  - control01:5672
-  - control02:5672
-  - control03:5672
+  - node01:5672
+  - node02:5672
+  - node03:5672
 bind_address: "%{ipaddress_eth0}"
 
 cinder::volume::iscsi::iscsi_ip_address: "%{ipaddress_eth0}"
