@@ -21,7 +21,7 @@ node-global:
   kopts: "netcfg/get_nameservers=2.4.1.254 \
 netcfg/confirm_static=true \
 netcfg/get_ipaddress={$eth0_ip-address} \
-netcfg/get_gateway=192.168.242.100\
+netcfg/get_gateway=192.168.242.100 \
 netcfg/disable_autoconfig=true \
 netcfg/dhcp_options=\"Configure network manually\" \
 netcfg/no_default_route=true \
