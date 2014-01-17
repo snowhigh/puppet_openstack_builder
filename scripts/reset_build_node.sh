@@ -13,7 +13,7 @@ echo ""
 echo "Uninstalling OpenStack and Cobbler packages"
 echo ""
 
-apt-get purge -y `dpkg -l | awk '{ print $2 }' | grep -E '(openstack|ceilometer|ceph|cinder|glance|heat|horizon|keystone|neutron|nova|swift|nagios|collectd|cobbler|dnsmasq|puppet|passenger|apache2|mysql|galera|apt-cacher-ng|mongodb|git|openvswitch|postgresql|python2.7-dev|qemu|rabbitmq|erlang|ruby|build-essential|dpkg-dev|xinetd|x11|xfsprogs|haproxy|keepalived|memcached|augeas)'`
+apt-get purge -y `dpkg -l | awk '{ print $2 }' | grep -E '(openstack|ceilometer|ceph|cinder|glance|heat|horizon|keystone|neutron|nova|swift|nagios|collectd|cobbler|dnsmasq|puppet|passenger|apache2|mysql|galera|apt-cacher-ng|mongodb|git|openvswitch|postgresql|python2.7-dev|qemu|rabbitmq|erlang|ruby|build-essential|dpkg-dev|xinetd|x11|xfsprogs|haproxy|keepalived|memcached|augeas|zope|twisted)'`
 
 apt-get --purge autoremove -y
 
