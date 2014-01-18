@@ -94,4 +94,10 @@ ceph_cluster_network: '10.0.0.0/24'
 ceph_public_interface: 'eth1'
 ceph_public_network: '10.0.0.0/24'
 
-
+# A list of kernel modules that should be added to /etc/modules
+# and thus auto-loaded into the kernel at boot time.  It is recommended
+# that you include at least two modules: "8021q" is necessary for vlan
+# tagging, and "vhost_net" increases networking performance of instances.
+kernel_module_list:
+  - 8021q
+  - vhost_net
