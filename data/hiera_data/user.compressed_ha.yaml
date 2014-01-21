@@ -15,16 +15,19 @@ controller_internal_address: 192.168.255.40
 controller_public_address: 192.168.255.40
 controller_admin_address: 192.168.255.40
 
-# these are swift proxy VIPs
-swift_internal_address: 192.168.255.60
-swift_public_address: 192.168.255.60
-swift_admin_address: 192.168.255.60
-
 # maps to ovs local_ip from the gre data mappings
 internal_ip: "%{ipaddress_eth0}"
 external_interface: eth1
 public_interface: eth1
 private_interface: eth0
+
+# enable or disable swift haproxy configuration
+openstack-ha::load-balancer::swift_enabled: true
+
+# these are swift proxy VIPs
+swift_internal_address: 192.168.255.60
+swift_public_address: 192.168.255.60
+swift_admin_address: 192.168.255.60
 
 # Swift networking parameters
 swift_storage_interface: eth0.222
