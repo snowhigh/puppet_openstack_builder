@@ -1,5 +1,6 @@
 # COI parameters
 puppet::master::version: '3.2.3-1puppetlabs1'
+puppet_master_address: "%{fqdn}"
 
 enabled_services:
   - glance
@@ -28,8 +29,12 @@ nova::compute::libvirt::vncserver_listen: 0.0.0.0
 nova::compute::force_config_drive: true
 
 # information for package repos
-coe::base::openstack_release: havana
 coe::base::package_repo: cloud_archive
+openstack_release: havana
+pocket: false
+openstack_repo_location: false
+supplemental_repo: false
+
 
 # used for testing
 openstack::test_file::image_type: cirros
