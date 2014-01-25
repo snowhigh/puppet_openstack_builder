@@ -21,7 +21,7 @@ node-global:
   kopts: "netcfg/get_nameservers=2.4.1.254 \
 netcfg/confirm_static=true \
 netcfg/get_ipaddress={$eth0_ip-address} \
-netcfg/get_gateway=192.168.242.100\
+netcfg/get_gateway=192.168.242.100 \
 netcfg/disable_autoconfig=true \
 netcfg/dhcp_options=\"Configure network manually\" \
 netcfg/no_default_route=true \
@@ -155,7 +155,7 @@ compute-server:
   power_address: "192.168.2.113"
   interfaces:
     eth0:
-      mac-addres: "a3:bb:cc:dd:ee:ff"
+      mac-address: "a3:bb:cc:dd:ee:ff"
       dns-name: "compute-server.cisco.com"
       ip-address: "192.168.242.113"
       static: "0"
@@ -165,7 +165,7 @@ compute-server01:
   power_address: "192.168.2.114"
   interfaces:
     eth0:
-      mac-addres: "aa:b3:cc:dd:ee:ff"
+      mac-address: "aa:b3:cc:dd:ee:ff"
       dns-name: "compute-server01.cisco.com"
       ip-address: "192.168.242.114"
       static: "0"
@@ -175,7 +175,7 @@ compute-server02:
   power_address: "192.168.2.115"
   interfaces:
     eth0:
-      mac-addres: "aa:bb:c3:dd:ee:ff"
+      mac-address: "aa:bb:c3:dd:ee:ff"
       dns-name: "compute-server02.cisco.com"
       ip-address: "192.168.242.115"
       static: "0"      
@@ -185,7 +185,7 @@ compute-server03:
   power_address: "192.168.2.116"
   interfaces:
     eth0:
-      mac-addres: "aa:bb:cc:d3:ee:ff"
+      mac-address: "aa:bb:cc:d3:ee:ff"
       dns-name: "compute-server03.cisco.com"
       ip-address: "192.168.242.116"
       static: "0" 

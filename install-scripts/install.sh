@@ -71,8 +71,8 @@ if ${master}; then
   # Our default mode also assumes at least one other interface for OpenStack network
   export external_interface="${external_interface:-eth1}"
 
-  # For good puppet hygene, we'll want NTP setup.  Let's borrow one from Cisco
-  export ntp_server="${ntp_server:-ntp.esl.cisco.com}"
+  # For good puppet hygene, we'll want NTP setup.  Let's use the NTP pool by default
+  export ntp_server="${ntp_server:-pool.ntp.org}"
 
   # Since this is the master script, we'll run in apply mode
   export puppet_run_mode="apply"
@@ -145,8 +145,7 @@ export FACTER_puppet_run_mode="${puppet_run_mode:-agent}"
 
 puppet apply -v -d /etc/puppet/manifests/setup.pp --modulepath /etc/puppet/modules:/usr/share/puppet/modules --templatedir /etc/puppet/templates --certname `hostname -f`
 
-# make sure puppet master is running..
-puppet master –td —no-daemonize
+chown -R puppet:puppet /var/lib/puppet
 
 puppet plugin download --server `hostname -f`; service apache2 restart
 
