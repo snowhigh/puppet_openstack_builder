@@ -1,109 +1,106 @@
 #
-# this emulates provided user data
+# Parameters specified here are generally specific to the compressed_ha
+# scenario and will override any parameters of the same name that
+# are found in user.common.yaml.
 #
 
-ntp_servers:
-  - build-server.domain.name
-
-build_node_name: build-server.domain.name
-domain_name: domain.name
-
-coe::base::controller_hostname: node01
-
-# These are controller VIPs
-controller_internal_address: 192.168.255.40
-controller_public_address: 192.168.255.40
-controller_admin_address: 192.168.255.40
-
-# maps to ovs local_ip from the gre data mappings
-internal_ip: "%{ipaddress_eth0}"
-external_interface: eth1
-public_interface: eth1
-private_interface: eth0
-
-# enable or disable swift haproxy configuration
-openstack-ha::load-balancer::swift_enabled: true
-
-# these are swift proxy VIPs
-swift_internal_address: 192.168.255.60
-swift_public_address: 192.168.255.60
-swift_admin_address: 192.168.255.60
-
-# Swift networking parameters
-swift_storage_interface: eth0.222
 swift_storage_netmask: 255.255.255.0
 swift_proxy_net_ip: "%{ipaddress_eth0}"
 swift_local_net_ip: "%{ipaddress_eth0_222}"
 
+# Enable or disable swift haproxy configuration
+openstack-ha::load-balancer::swift_enabled: true
+
 nova::compute::vncserver_proxyclient_address: "%{ipaddress_eth0}"
 
-# user data for individual passwords
-cinder_db_password: cinder_pass
-glance_db_password: glance_pass
-keystone_db_password: keystone_db_pass
-nova_db_password: nova_pass
-network_db_password:   quantum_pass
-database_root_password: mysql_db_pass
-cinder_service_password: cinder_pass
-glance_service_password: glance_pass
-nova_service_password: nova_pass
-admin_password: Cisco123
-admin_token: keystone_admin_token
-network_service_password: quantum_pass
-rpc_password: openstack_rabbit_password
-#metadata_shared_secret: metadata_shared_secret,
+# Most password are set in user.common.yaml.  These
+# are changes or additional passwords used in the compressed_ha
+# scenario.
 metadata_shared_secret: false
-horizon_secret_key: super_secret
-swift_service_password: swift_pass
-swift_hash: swift_secret
 galera::server::wsrep_sst_password: wsrep_password
 galera::monitor::monitor_password: monitor_pass
 glance::backend::swift::swift_store_key: swift_pass
 
-# rabbitmq settings
+# In the compressed_ha scenario, Rabbit will be deployed with
+# mirroring and clustering.
 rabbitmq::server::config_mirrored_queues: true
 rabbitmq::server::config_cluster: true
+
+# The IP address on which Rabbit should listen.
 rabbitmq::server::node_ip_address: "%{ipaddress_eth0}"
+
+# In the compressed_ha scenario, we use Ceph RBD as the backend
+# storage for both Glance and Cinder by default.
+cinder_backend: rbd
+glance_backend: rbd
 
 #
 # HA connections
 #
+
+# The short hostname of each of the control nodes.  You will need
+# a minimum of 3 controller nodes to achieve high availability.
 controller_names:
   - node01
   - node02
   - node03
+
+# The IP addresses of each controller that HAProxy should front-end.
 openstack-ha::load-balancer::controller_ipaddresses:
   - 192.168.255.191
   - 192.168.255.195
   - 192.168.255.197
+
+# The short hostnames of the Swift proxy servers that HAProxy should
+# front-end.
 openstack-ha::load-balancer::swift_proxy_names:
   - node01
   - node02
   - node03
+
+# The IP addresses of the Swift proxy servers that HAProxy should
+# front-end.
 openstack-ha::load-balancer::swift_proxy_ipaddresses:
   - 192.168.255.191
   - 192.168.255.195
   - 192.168.255.197
+
+# The ipaddresses and port numbners of the memcached instances
+# that will front-end nova services.
 nova::memcached_servers:
   - 192.168.255.191:11211
   - 192.168.255.195:11211
   - 192.168.255.197:11211
+
+# The ipaddresses and port numbers of the memcached instances
+# that will front-end Swift services.
 openstack::swift::proxy::swift_memcache_servers:
   - 192.168.255.191:11211
   - 192.168.255.195:11211
   - 192.168.255.197:11211
+
+# The short hostnames and port numbers of the hosts on which
+# RabbitMQ is running.
 rabbit_hosts:
   - node01:5672
   - node02:5672
   - node03:5672
+
+# The address to whcih Horizon, Nova API, MySQL, and Galera should bind.
 bind_address: "%{ipaddress_eth0}"
 
-cinder::volume::iscsi::iscsi_ip_address: "%{ipaddress_eth0}"
-
-quantum::plugins::ovs::network_vlan_ranges: physnet1:223:225
+# The compressed_ha scenario uses provider networks to pass network
+# and allows the data center network to provide highly available
+# networking (e.g. via technologies such as VRRP).
+# This setting sets the vlan ranges to be used by the OVS plugin.
 neutron::plugins::ovs::network_vlan_ranges: physnet1:223:225
 
+# Swift can be configured to use a loopback volume or disks as storage
+# for volumes.  It is generally recommended to use 'disk' as 'loopback'
+# incurs a performance penalty.
 openstack::swift::storage-node::storage_type: disk
+
+# A list of the disks to be used for Swift storage on each node.
 openstack::swift::storage-node::storage_devices:
   - 'sdb'
   - 'sdc'
