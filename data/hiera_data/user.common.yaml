@@ -52,8 +52,10 @@ time_zone: UTC
 # (refer to http://projects.puppetlabs.com/issues/1168).
 build_node_name: build-server.domain.com
 
-# The domain name of the build node.
-domain_name: domain.name
+# Change the following to the host name you have given to your control
+# node.  This name should be in all lower case letters due to a Puppet
+# limitation (refer to http://projects.puppetlabs.com/issues/1168).
+coe::base::controller_hostname: control-server
 
 # The IP address to be used to connect to Horizon and external
 # services on the control node.  In the compressed_ha or full_ha scenarios,
@@ -133,7 +135,7 @@ autostart_puppet: true
 
 # If you are using Cisco UCS servers managed by UCSM, set the port on
 # which Cobbler should connect to UCSM in order to power nodes off and on.
-# If set to 443, the connection will use SSL, which is genreally 
+# If set to 443, the connection will use SSL, which is generally
 # desirable and is usually enabled on UCS systems.
 ucsm_port: 443
 
@@ -237,7 +239,7 @@ swift_local_net_ip: "%{ipaddress_eth0_222}"
 swift_storage_netmask: 255.255.255.0
 
 # The IP address of the Swift proxy server.
-swift_proxy_net_ip: "%{ipaddress_eth0}" 
+swift_proxy_net_ip: "%{ipaddress_eth0}"
 
 ### The following three parameters are only used if you are configuring
 ### Swift to serve as a backend for the Glance image service.
