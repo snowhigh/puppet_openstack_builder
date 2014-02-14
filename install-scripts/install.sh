@@ -62,8 +62,8 @@ fi
 
 
 if ${master}; then
-  # All in one defaults to the local host name for pupet master
-  export build_server="${build_server:-`hostname`}"
+  # All in one defaults to the local host name for puppet master
+  export build_server="${build_server:-`hostname -s`}"
   # We need to know the IP address as well, so either tell me
   # or I will assume it's the address associated with eth0
   export default_interface="${default_interface:-eth0}"
@@ -92,6 +92,7 @@ ntp_servers:
 
 # node addresses
 build_node_name: ${build_server}
+coe::base::controller_hostname: "${build_server}"
 controller_internal_address: "${build_server_ip}"
 controller_public_address: "${build_server_ip}"
 controller_admin_address: "${build_server_ip}"

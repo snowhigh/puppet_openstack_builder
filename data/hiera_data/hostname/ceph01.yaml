@@ -3,7 +3,12 @@
 cephdeploy::has_compute: true
 
 # these are the disks for this particular host that you wish to use as OSDs.
-# specify disks here will DESTROY any data on this disk during the first puppet run
+# specify disks here will DESTROY any data on this disk during the first
+# puppet run the format to use is disk:journal. If you want to have the
+# journal on the same disk as your OSD, use disk:disk
 cephdeploy::osdwrapper::disks:
-  - sdb
-  - sdc
+# ex. using an SSD journal (/dev/sdb)
+  - sdc:sdb
+  - sdd:sdb
+# ex. placing the journal on the same disk as the OSD
+  - sde:sde
