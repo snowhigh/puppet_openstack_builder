@@ -86,6 +86,15 @@ rabbit_hosts:
   - node02:5672
   - node03:5672
 
+# The short hostnames and port numbers of the hosts on which
+# mongodb is running
+mongodb::replset::sets:
+  rsmain:
+    members:
+      - node01:27017
+      - node02:27017
+      - node03:27017
+
 # The address to whcih Horizon, Nova API, MySQL, and Galera should bind.
 bind_address: "%{ipaddress_eth0}"
 
