@@ -1,6 +1,5 @@
 preseed:
   repo: "http://openstack-repo.cisco.com/openstack/cisco havana main"
-#  repo: "ftp://ftpeng.cisco.com/openstack/cisco havana main"
 
 profile:
   name: "precise"
