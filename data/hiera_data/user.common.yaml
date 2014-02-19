@@ -325,3 +325,16 @@ cinder_rbd_secret_uuid: 'e80afa94-a64c-486c-9e34-d55e85f26406'
 
 # The name of the pool used to store glance images.
 glance_ceph_pool: 'images'
+
+
+nfs_server_list: 'nfs.cisco.com'
+
+# Mount options passed to the nfs client. See section of the nfs man page for details.
+# nfs_mount_options:
+
+# Base dir containing mount points for nfs shares.
+nfs_mount_point_base: '/var/lib/cinder'
+
+# File with the list of available nfs shares
+nfs_shares_config: '/etc/cinder/nfs_shares.conf'
+

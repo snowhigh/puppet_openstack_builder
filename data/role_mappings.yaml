@@ -29,3 +29,6 @@ swift-storage03: swift_storage
 node01: compressed_ha
 node02: compressed_ha
 node03: compressed_ha
+
+compute: compute
+
