@@ -5,7 +5,7 @@ classes:
   - apache::mod::proxy_http
   - naginator
   - collectd
-  - coi::profiles::cobbler_server
+  #- coi::profiles::cobbler_server
   - coi::profiles::cache_server
   - coi::profiles::puppet::master
   - graphite
