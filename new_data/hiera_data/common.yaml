@@ -1,0 +1,65 @@
+# COI parameters
+puppet::master::version: '3.2.3-1puppetlabs1'
+puppet_master_address: "%{fqdn}"
+
+enabled_services:
+  - glance
+  - cinder
+  - keystone
+  - nova
+  # should I be able to interpolate this?
+  - "%{network_service}"
+  - swift
+
+allowed_hosts: "%"
+
+# openstack parameters
+admin_email: root@localhost
+rpc_user: openstack_rabbit_user
+verbose: false
+debug: false
+cinder::scheduler::scheduler_driver: 'cinder.scheduler.simple.SimpleScheduler'
+nova::compute::quantum::libvirt_vif_driver: nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver
+nova::compute::neutron::libvirt_vif_driver: nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver
+service_tenant: services
+admin_tenant: admin
+package_ensure: present
+nova::compute::libvirt::libvirt_type: qemu
+nova::compute::libvirt::vncserver_listen: 0.0.0.0
+nova::compute::force_config_drive: true
+
+# information for package repos
+coe::base::package_repo: cloud_archive
+openstack_release: havana
+pocket: false
+openstack_repo_location: false
+supplemental_repo: false
+
+
+# used for testing
+openstack::test_file::image_type: cirros
+openstack::client::ceilometer: false
+
+cinder::volume::iscsi::iscsi_ip_address: 0.0.0.0
+# swift info
+glance::backend::swift::swift_store_user: services:swift
+glance::backend::swift::swift_store_create_container_on_put: true
+
+openstack::swift::storage-node::storage_type: loopback
+openstack::swift::storage-node::storage_devices:
+  - 1
+  - 2
+  - 3
+
+apache::mpm_module: prefork
+
+# Fix odd behaviors
+horizon::django_debug: true
+
+# Tempest configuration
+openstack::provision::identity_uri: 'http://127.0.0.1:5000/v2.0/'
+openstack::provision::admin_tenant_name: openstack
+openstack::provision::admin_password: Cisco123
+openstack::provision::resize_available: false
+openstack::provision::change_password_available: false
+openstack::provision::public_network_name: nova

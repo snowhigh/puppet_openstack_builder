@@ -1,0 +1,9 @@
+# has compute must be set for any server running nova compute
+# nova uses the secret from virsh
+cephdeploy::has_compute: true
+
+# these are the disks for this particular host that you wish to use as OSDs.
+# specify disks here will DESTROY any data on this disk during the first puppet run
+cephdeploy::osdwrapper::disks:
+  - sdb
+  - sdc
