@@ -6,3 +6,7 @@ classes:
   - "nova::compute::%{network_service}"
   - "%{network_service}"
   - "%{network_service}::agents::%{network_plugin}"
+# stuff for live migration
+  - nova::migration::libvirt
+  - nova::compute::libvirt:wq
+

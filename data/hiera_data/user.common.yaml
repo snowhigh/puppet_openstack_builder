@@ -32,7 +32,7 @@ var_part_size: 432000
 # it is, you can also add entries for the nodes in your corporate DNS
 # environment they will be usable *if* the above addresses are routeable
 # from elsewhere in your network.
-domain_name: domain.name
+domain_name: cisco.com
 
 ########### NTP Configuration ############
 # Change this to the location of a time server or servers in your
@@ -50,7 +50,7 @@ time_zone: UTC
 # Change the following to the short host name you have given your build node.
 # This name should be in all lower case letters due to a Puppet limitation
 # (refer to http://projects.puppetlabs.com/issues/1168).
-build_node_name: build-server
+build_node_name: aio
 
 # Change the following to the host name you have given to your control
 # node.  This name should be in all lower case letters due to a Puppet
@@ -61,19 +61,19 @@ coe::base::controller_hostname: control-server
 # services on the control node.  In the compressed_ha or full_ha scenarios,
 # this will be an address to be configured as a VIP on the HAProxy
 # load balancers, not the address of the control node itself.
-controller_public_address: 192.168.242.10
+controller_public_address: 10.0.0.1
 
 # The IP address used for internal communication with the control node.
 # In the compressed_ha or full_ha scenarios, this will be an address
 # to be configured as a VIP on the HAProxy load balancers, not the address
 # of the control node itself.
-controller_internal_address: 192.168.242.10
+controller_internal_address: 10.0.0.1
 
 # The IP address used for management functions (such as monitoring)
 # on the control node.  In the compressed_ha or full_ha scenarios, this will
 # be an address to be configured as a VIP on the HAProxy
 # load balancers, not the address of the control node itself.
-controller_admin_address: 192.168.242.10
+controller_admin_address: 10.0.0.1
 
 # Control node interfaces.
 # internal_ip be used for the ovs local_ip setting for GRE tunnels.
@@ -82,7 +82,7 @@ controller_admin_address: 192.168.242.10
 # (which is predefined already in $controller_node_internal, and the internal
 # interface for compute nodes.  It is generally also the IP address
 # used in Cobbler node definitions.
-internal_ip: "%{ipaddress_eth3}"
+internal_ip: "%{ipaddress_eth1}"
 
 # The external_interface is used to provide a Layer2 path for
 # the l3_agent external router interface.  It is expected that
@@ -107,18 +107,18 @@ private_interface: eth1
 ### Cobbler config
 # The IP address of the node on which Cobbler will be installed and
 # on which it will listen.
-cobbler_node_ip: 192.168.242.10
+cobbler_node_ip: 10.0.0.1
 
 # The subnet address of the subnet on which Cobbler should serve DHCP
 # addresses.
-node_subnet: '192.168.242.0'
+node_subnet: '10.0.0.0'
 
 # The netmask of the subnet on which Cobbler should serve DHCP addresses.
 node_netmask: '255.255.255.0'
 
 # The default gateway that should be provided to DHCP clients that acquire
 # an address from Cobbler.
-node_gateway: '192.168.242.1'
+node_gateway: '10.0.0.1'
 
 # The admin username and crypted password used to authenticate to Cobbler.
 admin_user: localadmin
@@ -155,7 +155,7 @@ install_drive: /dev/sda
 # This should generally be an address that is accessible via
 # horizon.  You can set it to an actual IP address (e.g. "192.168.1.1"),
 # or use facter to get the IP address assigned to a particular interface.
-nova::compute::vncserver_proxyclient_address: "%{ipaddress_eth3}"
+nova::compute::vncserver_proxyclient_address: 0.0.0.0
 
 ### The following are passwords and usernames used for
 ### individual services.  You may wish to change the passwords below
@@ -208,20 +208,20 @@ swift_hash: super_secret_swift_hash
 # other members of the Swift cluster.  In the compressed_ha or full_ha
 # scenarios, this will be the address to be configured as a VIP on 
 # the HAProxy load balancers, not the address of an individual Swift node.
-swift_internal_address: 192.168.242.41
+swift_internal_address: 10.0.0.1
 
 # The IP address which external entities will use to connect to Swift,
 # including clients wishing to upload or retrieve objects.  In the
 # compressed_ha or full_ha scenarios, this will be the address to
 # be configured as a VIP on the HAProxy load balancers, not the address
 # of an individual Swift node.
-swift_public_address: 192.168.242.41
+swift_public_address: 10.0.0.1
 
 # The IP address over which administrative traffic for the Swift
 # cluster will flow.  In the compressed_ha or full_ha
 # scenarios, this will be the address to be configured as a VIP on 
 # the HAProxy load balancers, not the address of an individual Swift node.
-swift_admin_address: 192.168.242.41
+swift_admin_address: 10.0.0.1
 
 # The interface on which Swift will run data storage traffic.
 # This should generally be a different interface than is used for
@@ -326,15 +326,22 @@ cinder_rbd_secret_uuid: 'e80afa94-a64c-486c-9e34-d55e85f26406'
 # The name of the pool used to store glance images.
 glance_ceph_pool: 'images'
 
+# enable nova nfs-based live migration
+migration_support: True
 
-nfs_server_list: 'nfs.cisco.com'
+# nfs servers for nova live migration
+nova_nfs_server_list: 'nfs.cisco.com'
 
 # Mount options passed to the nfs client. See section of the nfs man page for details.
 # nfs_mount_options:
+# Base dir containing mount points for nfs share to store instance images.
+nfs_mount_point_base: '/var/lib/nova/instances'
 
-# Base dir containing mount points for nfs shares.
-nfs_mount_point_base: '/var/lib/cinder'
+# Configure nfs volume storage for cinder
+cinder_nfs_enabled: False
 
-# File with the list of available nfs shares
-nfs_shares_config: '/etc/cinder/nfs_shares.conf'
+# nfs servers for cinder
+cinder_nfs_server_list: ''
 
+# File with the list of available nfs shares for Cinder
+nfs_shares_config: '/etc/cinder/shares.txt'

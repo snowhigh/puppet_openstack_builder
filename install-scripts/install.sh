@@ -151,6 +151,9 @@ chown -R puppet:puppet /var/lib/puppet
 
 puppet plugin download --server `hostname -f`; service apache2 restart
 
+echo "yeah"
+sleep 9999
+
 if  [ "${scenario}" == "all_in_one" ] ; then
   # this is an AIO install, apply our pre-canned configuration/
   puppet apply /etc/puppet/manifests/site.pp --certname ${build_server} --debug

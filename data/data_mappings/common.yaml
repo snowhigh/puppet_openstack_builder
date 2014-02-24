@@ -216,3 +216,8 @@ log_facility:
   - keystone::log_facility
   - neutron::log_facility
   - nova::log_facility
+
+
+
+migration_support:
+  - nova::compute::libvirt
