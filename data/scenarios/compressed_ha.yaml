@@ -15,6 +15,7 @@ roles:
       - coe::network::interface
       - openstack-ha::load-balancer
       - cinder::setup_test_volume
+      - mongodb::replset
       #- openstack::swift::proxy
       #- openstack::swift::storage-node
     class_groups:
