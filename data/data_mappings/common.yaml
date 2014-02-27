@@ -24,7 +24,8 @@ verbose:
 admin_email:
   - keystone::roles::admin::email
   - ceilometer::keystone::auth::email
-# this needs to be supplied as a defualt
+
+# this needs to be supplied as a default
 # b/c the default to guest is kind of annoying
 # (and not entirely reasonable)
 rpc_user:
@@ -41,6 +42,23 @@ rpc_user:
   - ceilometer::rabbit_userid
   - ceilometer::qpid_username
   - heat::rabbit_userid
+  - glance::notify::rabbitmq::rabbit_userid
+
+rpc_password:
+  - cinder::qpid_password
+  - cinder::rabbit_password
+  - ceilometer::qpid_password
+  - ceilometer::rabbit_password
+  - glance::notify::qpid::qpid_password
+  - glance::notify::rabbitmq::rabbit_password
+  - heat::rabbit_password
+  - neutron::qpid_password
+  - neutron::rabbit_password
+  - nova::qpid_password
+  - nova::rabbit_password
+  - nova::qpid::qpid_password
+  - nova::rabbitmq::password
+
 enabled_services:
   - coi::profiles::openstack::endpoints::enabled_services
   - coi::profiles::openstack::databases::mysql::enabled_services
@@ -61,6 +79,7 @@ allowed_hosts:
 #
 controller_internal_address:
   - glance::api::registry_host 
+  - glance::notify::rabbitmq::rabbit_host
   - cinder::qpid_hostname
   - cinder::rabbit_host
   - nova::rabbit_host
@@ -98,6 +117,7 @@ controller_internal_address:
   - neutron::keystone::auth::internal_address
   - openstack::auth_file::controller_node
   - postgresql::config::listen_addresses
+  # deprecated past 0.x
   - mysql::config::bind_address
   - quantum::agents::metadata::metadata_ip
   - neutron::agents::metadata::metadata_ip
@@ -122,6 +142,16 @@ controller_public_address:
   - swift::keystone::auth::public_address
   - ceilometer::keystone::auth::public_address
   - openstack::swift::proxy::swift_proxy_net_ip
+controller_public_protocol:
+  - ceilometer::keystone::auth::public_protocol
+  - cinder::keystone::auth::public_protocol
+  - glance::keystone::auth::public_protocol
+  - heat::keystone::auth::public_protocol
+  - heat::keystone::auth_cfn::public_protocol
+  - keystone::endpoint::public_protocol
+  - neutron::keystone::auth::public_protocol
+  - nova::keystone::auth::public_protocol
+  - swift::keystone::auth::public_protocol
 controller_admin_address:
   - cinder::keystone::auth::admin_address
   - glance::keystone::auth::admin_address
@@ -169,6 +199,8 @@ swift_local_net_ip:
   - neutron::agents::metadata::auth_url
   - ceilometer::agent::compute::auth_url
   - ceilometer::agent::auth::auth_url
+"http://%{controller_internal_address}:5000/v2.0/ec2tokens":
+  - heat::keystone_ec2_uri
 "%{controller_internal_address}:9292":
   - nova::glance_api_servers
 "http://%{controller_internal_address}:8000":
