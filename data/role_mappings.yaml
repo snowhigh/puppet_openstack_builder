@@ -32,3 +32,4 @@ node03: compressed_ha
 
 compute: compute
 
+aio: all_in_one

@@ -326,22 +326,9 @@ cinder_rbd_secret_uuid: 'e80afa94-a64c-486c-9e34-d55e85f26406'
 # The name of the pool used to store glance images.
 glance_ceph_pool: 'images'
 
-# enable nova nfs-based live migration
-migration_support: True
-
-# nfs servers for nova live migration
-nova_nfs_server_list: 'nfs.cisco.com'
-
-# Mount options passed to the nfs client. See section of the nfs man page for details.
-# nfs_mount_options:
-# Base dir containing mount points for nfs share to store instance images.
-nfs_mount_point_base: '/var/lib/nova/instances'
-
-# Configure nfs volume storage for cinder
-cinder_nfs_enabled: False
-
-# nfs servers for cinder
-cinder_nfs_server_list: ''
-
-# File with the list of available nfs shares for Cinder
-nfs_shares_config: '/etc/cinder/shares.txt'
+nova_user_id: '499'
+nova_group_id: '499'
+nfs_migration: true
+nfs_mount_path: '/var/lib/nova/instances'
+nfs_mount_device: 'nfs:/instances'
+migration_support: true

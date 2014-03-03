@@ -216,8 +216,14 @@ log_facility:
   - keystone::log_facility
   - neutron::log_facility
   - nova::log_facility
-
-
-
 migration_support:
   - nova::compute::libvirt
+  - coe::compute::migration
+nova_user_id:
+  - nova::nova_user_id
+nova_group_id:
+  - nova::nova_group_id
+nfs_mount_path:
+  - coe::compute::migration
+nfs_mount_device:
+  - coe::compute::migration
