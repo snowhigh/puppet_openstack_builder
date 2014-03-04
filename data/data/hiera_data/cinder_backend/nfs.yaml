@@ -1,0 +1,4 @@
+cinder::volume::nfs::nfs_server: '127.0.0.1'
+cinder::volume::nfs::nfs_mount_options: ''
+cinder::volume::nfs::nfs_mount_point_base: '/var/lib/cinder'
+cinder::volume::nfs::nfs_shares_config: '/etc/cinder/shares.txt'

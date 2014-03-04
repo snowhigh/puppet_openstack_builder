@@ -1,0 +1,5 @@
+class_groups:
+  - nova_compute
+  - cinder_volume
+  - ceilometer_compute
+  - live_migration_nfs

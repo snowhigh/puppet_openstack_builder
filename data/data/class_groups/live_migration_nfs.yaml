@@ -1,0 +1,3 @@
+classes:
+  - coe::compute::migration
+  - nova::compute::libvirt
