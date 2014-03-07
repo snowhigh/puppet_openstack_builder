@@ -36,6 +36,8 @@ password:
   - quantum::db::postgresql::password
   - neutron::db::mysql::password
   - neutron::db::postgresql::password
+  - neutron::plugins::cisco::database_pass
+  - neutron::plugins::cisco::keystone_password
   - mysql::config::root_password
   - postgresql::config::postgres_password
   - cinder::api::keystone_password

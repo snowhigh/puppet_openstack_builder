@@ -392,3 +392,66 @@ ssl_ca_key: '/etc/keystone/ssl/private/cakey.pem'
 
 # SSL cert subject
 ssl_cert_subject: '/C=US/ST=Unset/L=Unset/O=Unset/CN=localhost'
+
+## Cisco plugin settings
+# Uncomment and adjust the lines below if you wish to use the Cisco
+# Nexus plugin.  Make sure you also:
+# 1.) Set the tenant_network_type (vlan or gre) in 
+#     ../global_hiera_params/common.yaml
+# 2.) Set the network_vlan_ranges to the vlan range you want to use
+#     in hiera_data/tenant_network_type/vlan.yaml if using vlans
+#     for tenant segmentation (as opposed to GRE).
+# 3.) Add these two lines to ../class_groups/network_controller.yaml:
+#     - "coe::nexus"
+#     - "neutron::plugins::cisco"
+# 4.) Uncomment the "Cisco plugin support" section of the
+#     ../data_mappings/common.yaml file.
+# 5.) Because the Ubuntu init scripts assume only one plugin will
+#     be used, if you are using the Cisco plugin and OVS together
+#     you may need to start neutron manually rather than via an init
+#     script.  The command is:
+#     /usr/bin/python /usr/bin/neutron-server --config-file \
+#     /etc/neutron/neutron.conf --log-file /var/log/neutron/server.log \
+#     --config-file /etc/neutron/plugins/cisco/cisco_plugins.ini \
+#     --config-file /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini
+
+
+# Use the Cisco plugin.  Note that we set this here rather than in
+# global_hiera_params because in most use cases we'll want to set up
+# both the Cisco plugin and the OVS plugin (and because the
+# Cisco plugin by itself is agentless).
+#neutron::core_plugin: 'neutron.plugins.cisco.network_plugin.PluginV2'
+
+# The Nexus sub-plugin to use.
+#nexus_plugin: 'neutron.plugins.cisco.nexus.cisco_nexus_plugin_v2.NexusPlugin'
+
+# The vswitch sub-plugin to use with the Cisco plugin.
+#vswitch_plugin: 'neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2'
+
+# The credentials to use to log into each Nexus switch in your topology.
+# This should be an array of strings of the following form (switch IP
+# address, username, and password separated by forward slashes):
+# - 'switch1 IP address/username/password'
+# - 'switch2 IP address/username/password'
+#nexus_credentials:
+#  - '172.18.117.27/admin/password'
+
+# Switch configuration information.  This is a hash for each switch in
+# your topology.  The format for each entry is:
+#    'switch_name':    # The switch's hostname or other unique identifier
+#    'ip_address': '192.168.2.81' # The IP of the switch
+#    'username': 'admin'  # The username to log in with
+#    'password': 'password' # The password to log in with
+#    'ssh_port': 22  # The port NETCONF messages should be sent to via SSH
+#    'servers':
+#      'server1': '1/1'  # Hostname of a server and the port it is connected to
+#      'server2': '1/2'
+#
+#nexus_config:
+#  'cvf2-leaf-f1':
+#    'ip_address': '172.18.117.27'
+#    'username': 'admin'
+#    'password': 'password'
+#    'ssh_port': 22
+#    'servers':
+#      'control01': '1/7'
