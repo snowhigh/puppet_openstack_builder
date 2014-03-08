@@ -324,3 +324,12 @@ ssl_ca_key:
   - keystone::ssl_ca_key
 ssl_cert_subject:
   - keystone::ssl_cert_subject
+# Cisco plugin support
+#nexus_plugin:
+#  - neutron::plugins::cisco::nexus_plugin
+#vswitch_plugin:
+#  - neutron::plugins::cisco::vswitch_plugin
+#nexus_credentials:
+#  - coe::nexus::nexus_credentials
+#nexus_config:
+#  - coe::nexus::nexus_config
