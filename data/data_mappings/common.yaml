@@ -333,3 +333,9 @@ ssl_cert_subject:
 #  - coe::nexus::nexus_credentials
 #nexus_config:
 #  - coe::nexus::nexus_config
+puppet_repo:
+  - coi::profiles::openstack::base::puppet_repo
+  - coe::base::puppet_repo
+puppet_repo_location:
+  - coi::profiles::openstack::base::puppet_repo_location
+  - coe::base::puppet_repo_location
