@@ -11,7 +11,6 @@ roles:
   compressed_ha:
     classes:
       - coe::base
-      - naginator::control_target
       - coe::network::interface
       - openstack-ha::load-balancer
       - cinder::setup_test_volume
@@ -25,7 +24,6 @@ roles:
   compressed_ha_cephall:
     classes:
       - coe::base
-      - naginator::control_target
       - coe::network::interface
       - openstack-ha::load-balancer
       - cinder::setup_test_volume
@@ -40,7 +38,6 @@ roles:
   compressed_ha_cephosd:
     classes:
       - coe::base
-      - naginator::control_target
       - coe::network::interface
       - openstack-ha::load-balancer
       - cinder::setup_test_volume
@@ -55,7 +52,6 @@ roles:
   compressed_ha_cephmon:
     classes:
       - coe::base
-      - naginator::control_target
       - coe::network::interface
       - openstack-ha::load-balancer
       - cinder::setup_test_volume
@@ -70,7 +66,6 @@ roles:
   compute:
     classes:
       - coe::base
-      - naginator::compute_target
       - cinder::setup_test_volume
     class_groups:
       - compute
