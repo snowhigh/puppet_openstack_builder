@@ -257,9 +257,15 @@ glance::backend::swift::swift_store_key: secret_key
 # to the Swift cluster.
 glance::backend::swift::swift_store_auth_address: '127.0.0.1'
 
+# The volume name when using iSCSI for cinder
+cinder_volumes_name: 'cinder-volumes'
+
 ### Ceph configuration
 # The name of the Ceph cluster to be deployed.
 ceph_cluster_name: 'ceph'
+
+### Ceph configuration file
+ceph_configuration_file: '/etc/ceph/ceph.conf'
 
 # The FSID of the Ceph monitor node.  This should take the form
 # of a UUID.
@@ -279,6 +285,9 @@ ceph_primary_mon: 'ceph-mon01'
 
 # The IP address used to connect to the primary monitor node.
 ceph_monitor_address: '10.0.0.1'
+
+# The rbd account OpenStack will use to communicate with ceph.
+ceph_openstack_user: 'admin'
 
 # Ceph will be deployed using the cephdeploy tool.  This tool requires
 # a username and password to authenticate.
@@ -314,15 +323,8 @@ kernel_module_list:
 # the line below.  It can also be set to 'iscsi'.
 #cinder_backend: rbd
 
-# The username Cinder should use to connect to the cluster.
-cinder_rbd_user: 'admin'
-
 # The name of the pool used to store Cinder volumes.`
 cinder_rbd_pool: 'volumes'
-
-# The UUID of the shared virsh secret used by Cinder to
-# authenticate to the Ceph cluster.
-cinder_rbd_secret_uuid: 'e80afa94-a64c-486c-9e34-d55e85f26406'
 
 ### The following parameter is used only if you are deploying Ceph
 ### as a backend for the Glance image service.
@@ -392,6 +394,24 @@ ssl_ca_key: '/etc/keystone/ssl/private/cakey.pem'
 
 # SSL cert subject
 ssl_cert_subject: '/C=US/ST=Unset/L=Unset/O=Unset/CN=localhost'
+
+## NFS Live migration options ##
+# If on a debian-based distro, you must also set the nova uid/gid
+# when using live migration. This is not needed for RHEL distros
+# as they predefine the uid/gid.
+
+# migration_support: enable NFS mount handling.
+# nfs_mount_path:  the path where nova instances are stored.
+# nfs_mount_device: the full path to your NFS resource.
+# nfs_fs_type: the mount type.
+# nfs_mount_options: options, as they would appear in fstab
+# Example config:
+#  coe::compute::migration::migration_support: true
+#  coe::compute::migration::nfs_mount_path: '/var/lib/nova/instances'
+#  coe::compute::migration::nfs_mount_device: 'nfs.domain.com:/myinstances'
+#  coe::compute::migration::nfs_fs_type: 'nfs'
+#  coe::compute::migration::nfs_mount_options: 'auto'
+
 
 ## Cisco plugin settings
 # Uncomment and adjust the lines below if you wish to use the Cisco

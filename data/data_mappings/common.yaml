@@ -235,6 +235,12 @@ openstack_repo_location:
 supplemental_repo:
   - coe::base::supplemental_repo
   - coi::profiles::cobbler_server::supplemental_repo
+puppet_repo:
+  - coi::profiles::openstack::base::puppet_repo
+  - coe::base::puppet_repo
+puppet_repo_location:
+  - coi::profiles::openstack::base::puppet_repo_location
+  - coe::base::puppet_repo_location
 use_syslog:
   - ceilometer::use_syslog
   - cinder::use_syslog
@@ -324,6 +330,23 @@ ssl_ca_key:
   - keystone::ssl_ca_key
 ssl_cert_subject:
   - keystone::ssl_cert_subject
+# MySQL module version settings
+puppet_mysql_version:
+  - cinder::db::mysql::mysql_module
+  - cinder::mysql_module
+  - glance::api::mysql_module
+  - glance::db::mysql_module
+  - glance::registry::mysql_module
+  - heat::db::mysql::mysql_module
+  - heat::mysql_module
+  - neutron::db::mysql::mysql_module
+  - neutron::server::mysql_module
+  - keystone::db::mysql::mysql_module
+  - keystone::mysql_module
+  - ceilometer::db::mysql::mysql_module
+  - ceilometer::db::mysql_module
+  - nova::db::mysql::mysql_module
+  - nova::mysql_module
 # Cisco plugin support
 #nexus_plugin:
 #  - neutron::plugins::cisco::nexus_plugin
