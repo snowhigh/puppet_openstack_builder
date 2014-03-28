@@ -36,4 +36,4 @@ puppet::agent::version: latest
 coi::profiles::puppet::master::puppetlabs_repo: false
 
 # Use KVM by default
-nova::compute::libvirt::libvirt_type: kvm
+nova::compute::libvirt::libvirt_virt_type: kvm
