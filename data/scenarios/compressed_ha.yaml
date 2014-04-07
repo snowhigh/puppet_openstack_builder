@@ -16,9 +16,22 @@ roles:
       - cinder::setup_test_volume
       #- openstack::swift::proxy
       #- openstack::swift::storage-node
+      - "nova::%{rpc_type}"
+      - "%{network_service}"
+      - "%{network_service}::plugins::%{network_plugin}"
+      - "%{network_service}::server"
     class_groups:
-      - controller
-      - compute
+      - glance_all
+      - keystone_all
+      - cinder_controller
+      - nova_controller
+      - horizon
+      - ceilometer_controller
+      - heat_all
+      - "%{db_type}_database"
+      - nova_compute
+      - cinder_volume
+      - ceilometer_compute
       - provider_network_controller
       - test_file
   compressed_ha_cephall:
@@ -29,9 +42,22 @@ roles:
       - cinder::setup_test_volume
       #- openstack::swift::proxy
       #- openstack::swift::storage-node
+      - "nova::%{rpc_type}"
+      - "%{network_service}"
+      - "%{network_service}::plugins::%{network_plugin}"
+      - "%{network_service}::server"
     class_groups:
-      - controller
-      - compute
+      - glance_all
+      - keystone_all
+      - cinder_controller
+      - nova_controller
+      - horizon
+      - ceilometer_controller
+      - heat_all
+      - "%{db_type}_database"
+      - nova_compute
+      - cinder_volume
+      - ceilometer_compute
       - provider_network_controller
       - ceph_all
       - test_file
@@ -44,9 +70,22 @@ roles:
       #- openstack::swift::proxy
       #- openstack::swift::storage-node
       - cephdeploy::osdwrapper
+      - "nova::%{rpc_type}"
+      - "%{network_service}"
+      - "%{network_service}::plugins::%{network_plugin}"
+      - "%{network_service}::server"
     class_groups:
-      - controller
-      - compute
+      - glance_all
+      - keystone_all
+      - cinder_controller
+      - nova_controller
+      - horizon
+      - ceilometer_controller
+      - heat_all
+      - "%{db_type}_database"
+      - nova_compute
+      - cinder_volume
+      - ceilometer_compute
       - provider_network_controller
       - test_file
   compressed_ha_cephmon:
@@ -58,9 +97,22 @@ roles:
       #- openstack::swift::proxy
       #- openstack::swift::storage-node
       - cephdeploy::mon
+      - "nova::%{rpc_type}"
+      - "%{network_service}"
+      - "%{network_service}::plugins::%{network_plugin}"
+      - "%{network_service}::server"
     class_groups:
-      - controller
-      - compute
+      - glance_all
+      - keystone_all
+      - cinder_controller
+      - nova_controller
+      - horizon
+      - ceilometer_controller
+      - heat_all
+      - "%{db_type}_database"
+      - nova_compute
+      - cinder_volume
+      - ceilometer_compute
       - provider_network_controller
       - test_file
   compute:
@@ -68,7 +120,9 @@ roles:
       - coe::base
       - cinder::setup_test_volume
     class_groups:
-      - compute
+      - nova_compute
+      - cinder_volume
+      - ceilometer_compute
   swift_storage:
     classes:
       - coe::base
