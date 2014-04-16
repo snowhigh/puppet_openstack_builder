@@ -176,7 +176,6 @@ cisco_module_prefix = "#{base_url}/CiscoSystems/puppet-"
   'collectd',
   'graphite',
   'dnsmasq',
-  'naginator'
 ].each do |module_name|
   mod "CiscoSystems/#{module_name}",
     :git => "#{cisco_module_prefix}#{module_name}",
