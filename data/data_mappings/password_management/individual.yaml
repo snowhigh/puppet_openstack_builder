@@ -21,6 +21,7 @@ network_db_password:
   - neutron::plugins::cisco::database_pass
 database_root_password:
   - mysql::config::root_password
+  - galera::root_password
   - postgresql::config::postgres_password
 cinder_service_password:
   - cinder::api::keystone_password
@@ -32,6 +33,7 @@ glance_service_password:
 nova_service_password:
   - nova::keystone::auth::password
   - nova::api::admin_password
+  - neutron::server::notifications::nova_admin_password
 admin_token:
   - keystone::admin_token
 admin_password:

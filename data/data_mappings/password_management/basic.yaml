@@ -26,6 +26,7 @@ password:
   - glance::notify::qpid::qpid_password
   - cinder::db::mysql::password
   - cinder::db::postgresql::password
+  - galera::root_password
   - glance::db::mysql::password
   - glance::db::postgresql::password
   - keystone::db::mysql::password
@@ -56,6 +57,7 @@ password:
   - neutron::keystone::auth::password
   - quantum::server::auth_password
   - neutron::server::auth_password
+  - neutron::server::notifications::nova_admin_password
   - nova::network::quantum::quantum_admin_password
   - nova::network::neutron::neutron_admin_password
   - quantum::agents::metadata::auth_password
