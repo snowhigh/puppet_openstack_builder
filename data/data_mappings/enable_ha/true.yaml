@@ -37,8 +37,9 @@ bind_address:
   - cinder::api::bind_host
   - glance::registry::bind_host
   - glance::api::bind_host
-  - nova::vncproxy::host
   - nova::api::api_bind_address
+  - nova::compute::vncserver_proxyclient_address
+  - nova::vncproxy::host
   - mysql::config::bind_address
   - keystone::bind_host
   - memcached::listen_ip
