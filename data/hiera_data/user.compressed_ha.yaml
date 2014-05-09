@@ -11,8 +11,6 @@ swift_local_net_ip: "%{ipaddress_eth0_222}"
 # Enable or disable swift haproxy configuration
 openstack-ha::load-balancer::swift_enabled: true
 
-nova::compute::vncserver_proxyclient_address: "%{ipaddress_eth0}"
-
 # Most password are set in user.common.yaml.  These
 # are changes or additional passwords used in the compressed_ha
 # scenario.
