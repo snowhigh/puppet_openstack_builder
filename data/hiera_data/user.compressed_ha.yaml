@@ -107,8 +107,11 @@ rabbit_hosts:
 #      - node02:27017
 #      - node03:27017
 
-# The address to whcih Horizon, Nova API, MySQL, and Galera should bind.
+# The address to which Horizon, Nova API, MySQL, and Galera should bind.
 bind_address: "%{ipaddress_eth0}"
+
+# set the bind_address for Apache
+apache::ip: "%{ipaddress_eth0}"
 
 # The compressed_ha scenario uses provider networks to pass network
 # and allows the data center network to provide highly available
