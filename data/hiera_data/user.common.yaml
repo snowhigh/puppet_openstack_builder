@@ -1,39 +1,3 @@
-
-#### Build Node Cobbler Information ######## 
-
-# If you use an HTTP/HTTPS proxy to reach the apt repositories that
-# packages will be installed from during installation, uncomment this
-# setting and specify the correct proxy URL.  If you do not use an
-# HTTP/HTTPS proxy, leave this setting commented out.
-#proxy: 'http://proxy-server.domain.com:8080'
-
-#### Disk partitioning options ###########
-# The /var directory is where logfiles and instance data are stored
-# on disk.  If you wish to have /var on it's own partition (considered
-# a best practice), set enable_var to true.
-enable_var: true
-
-# The Cinder volume service can make use of unallocated space within
-# the "cinder-volumes" volume group to create iscsi volumes for 
-# export to instances.  If you wish to leave free space for volumes
-# and not preallocate the entire install drive, set enable_vol_space
-# to true.
-enable_vol_space: true
-
-# Use the following two directives to set the size of the / and /var
-# partitions, respectively.  The var_part_size directive will be ignored
-# if enable_var is not set to true above.
-root_part_size: 65536
-var_part_size: 432000
-
-# This domain name will be the name your build and compute nodes use for the
-# local DNS.  It doesn't have to be the name of your corporate DNS - a local
-# DNS server on the build node will serve addresses in this domain - but if
-# it is, you can also add entries for the nodes in your corporate DNS
-# environment they will be usable *if* the above addresses are routeable
-# from elsewhere in your network.
-domain_name: domain.name
-
 ########### NTP Configuration ############
 # Change this to the location of a time server or servers in your
 # organization accessible to the build server.  The build server will
@@ -56,6 +20,14 @@ build_node_name: build-server
 # node.  This name should be in all lower case letters due to a Puppet
 # limitation (refer to http://projects.puppetlabs.com/issues/1168).
 coe::base::controller_hostname: control-server
+
+# This domain name will be the name your build and compute nodes use for the
+# local DNS.  It doesn't have to be the name of your corporate DNS - a local
+# DNS server on the build node will serve addresses in this domain - but if
+# it is, you can also add entries for the nodes in your corporate DNS
+# environment they will be usable *if* the above addresses are routeable
+# from elsewhere in your network.
+domain_name: domain.name
 
 # The IP address to be used to connect to Horizon and external
 # services on the control node.  In the compressed_ha or full_ha scenarios,
@@ -121,6 +93,35 @@ private_interface: eth1
 # The IP address of the node on which Cobbler will be installed and
 # on which it will listen.
 cobbler::server_ip: 192.168.242.10
+
+# Name servers for Cobbler to use
+cobbler::nameservers: '192.168.242.10'
+
+# Cobbler dnsmasq subnet
+cobbler::dhcp_subnet: '192.168.242.0'
+
+# Cobbler dnsmasq netmask
+cobbler::dhcp_netmask: '255.255.255.0'
+
+# Cobbler dnsmasq option routers
+cobbler::dhcp_option_routers: '192.168.242.1'
+
+# Cobbler dnsmasq IP range
+cobbler::dhcp_range: '192.168.242.0,static,255.255.255.0'
+
+# Cobbler DHCP interfaces
+cobbler::dhcp_interfaces: 'eth0'
+
+# Baremetal systems domain name
+cobbler::dhcp_option_domain_name: 'cisco.com'
+
+# Baremetal systems subnet
+cobbler::dhcp_option_subnet: '255.255.255.0'
+
+# Cobbler server identifier
+cobbler::server_identifier: '192.168.242.10'
+
+
 
 # The subnet address of the subnet on which Cobbler should serve DHCP
 # addresses.
@@ -245,22 +246,22 @@ swift_hash: super_secret_swift_hash
 
 # The IP address used by Swift on the control node to communicate with
 # other members of the Swift cluster.  In the compressed_ha or full_ha
-# scenarios, this will be the address to be configured as a VIP on 
+# scenarios, this will be the address to be configured as a VIP on
 # the HAProxy load balancers, not the address of an individual Swift node.
-swift_internal_address: 192.168.242.41
+swift_internal_address: "%{ipaddress_eth3}"
 
 # The IP address which external entities will use to connect to Swift,
 # including clients wishing to upload or retrieve objects.  In the
 # compressed_ha or full_ha scenarios, this will be the address to
 # be configured as a VIP on the HAProxy load balancers, not the address
 # of an individual Swift node.
-swift_public_address: 192.168.242.41
+swift_public_address: "%{ipaddress_eth3}"
 
 # The IP address over which administrative traffic for the Swift
 # cluster will flow.  In the compressed_ha or full_ha
-# scenarios, this will be the address to be configured as a VIP on 
+# scenarios, this will be the address to be configured as a VIP on
 # the HAProxy load balancers, not the address of an individual Swift node.
-swift_admin_address: 192.168.242.41
+swift_admin_address: "%{ipaddress_eth3}"
 
 # The interface on which Swift will run data storage traffic.
 # This should generally be a different interface than is used for
@@ -343,14 +344,6 @@ ceph_public_interface: 'eth1'
 # The subnet on which external entities will connect to the Ceph cluster.
 ceph_public_network: '10.0.0.0/24'
 
-# A list of kernel modules that should be added to /etc/modules
-# and thus auto-loaded into the kernel at boot time.  It is recommended
-# that you include at least two modules: "8021q" is necessary for vlan
-# tagging, and "vhost_net" increases networking performance of instances.
-kernel_module_list:
-  - 8021q
-  - vhost_net
-
 ### The following four parameters are used only if you are configuring
 ### Ceph to be a backend for the Cinder volume service.
 
@@ -366,6 +359,14 @@ cinder_rbd_pool: 'volumes'
 
 # The name of the pool used to store glance images.
 glance_ceph_pool: 'images'
+
+# Return the URL that references where the data is stored on
+# the backend storage system.  For example, if using the
+# file system store a URL of 'file:///path/to/image' will
+# be returned to the user in the 'direct_url' meta-data field.
+# This gives glance the ability to COW images, but revealing the
+# storage location may be a security risk.
+glance::api::show_image_direct_url: false
 
 ### The following parameters relate to Neutron L4-L7 services.
 
@@ -461,67 +462,3 @@ ssl_cert_subject: '/C=US/ST=Unset/L=Unset/O=Unset/CN=localhost'
 #  coe::compute::migration::nfs_mount_device: 'nfs.domain.com:/myinstances'
 #  coe::compute::migration::nfs_fs_type: 'nfs'
 #  coe::compute::migration::nfs_mount_options: 'auto'
-
-
-## Cisco plugin settings
-# Uncomment and adjust the lines below if you wish to use the Cisco
-# Nexus plugin.  Make sure you also:
-# 1.) Set the tenant_network_type (vlan or gre) in 
-#     ../global_hiera_params/common.yaml
-# 2.) Set the network_vlan_ranges to the vlan range you want to use
-#     in hiera_data/tenant_network_type/vlan.yaml if using vlans
-#     for tenant segmentation (as opposed to GRE).
-# 3.) Add these two lines to ../class_groups/network_controller.yaml:
-#     - "coe::nexus"
-#     - "neutron::plugins::cisco"
-# 4.) Uncomment the "Cisco plugin support" section of the
-#     ../data_mappings/common.yaml file.
-# 5.) Because the Ubuntu init scripts assume only one plugin will
-#     be used, if you are using the Cisco plugin and OVS together
-#     you may need to start neutron manually rather than via an init
-#     script.  The command is:
-#     /usr/bin/python /usr/bin/neutron-server --config-file \
-#     /etc/neutron/neutron.conf --log-file /var/log/neutron/server.log \
-#     --config-file /etc/neutron/plugins/cisco/cisco_plugins.ini \
-#     --config-file /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini
-
-
-# Use the Cisco plugin.  Note that we set this here rather than in
-# global_hiera_params because in most use cases we'll want to set up
-# both the Cisco plugin and the OVS plugin (and because the
-# Cisco plugin by itself is agentless).
-#neutron::core_plugin: 'neutron.plugins.cisco.network_plugin.PluginV2'
-
-# The Nexus sub-plugin to use.
-#nexus_plugin: 'neutron.plugins.cisco.nexus.cisco_nexus_plugin_v2.NexusPlugin'
-
-# The vswitch sub-plugin to use with the Cisco plugin.
-#vswitch_plugin: 'neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2'
-
-# The credentials to use to log into each Nexus switch in your topology.
-# This should be an array of strings of the following form (switch IP
-# address, username, and password separated by forward slashes):
-# - 'switch1 IP address/username/password'
-# - 'switch2 IP address/username/password'
-#nexus_credentials:
-#  - '172.18.117.27/admin/password'
-
-# Switch configuration information.  This is a hash for each switch in
-# your topology.  The format for each entry is:
-#    'switch_name':    # The switch's hostname or other unique identifier
-#    'ip_address': '192.168.2.81' # The IP of the switch
-#    'username': 'admin'  # The username to log in with
-#    'password': 'password' # The password to log in with
-#    'ssh_port': 22  # The port NETCONF messages should be sent to via SSH
-#    'servers':
-#      'server1': '1/1'  # Hostname of a server and the port it is connected to
-#      'server2': '1/2'
-#
-#nexus_config:
-#  'cvf2-leaf-f1':
-#    'ip_address': '172.18.117.27'
-#    'username': 'admin'
-#    'password': 'password'
-#    'ssh_port': 22
-#    'servers':
-#      'control01': '1/7'
