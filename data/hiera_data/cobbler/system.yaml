@@ -1,7 +1,7 @@
 cobbler_systems:
   somehost.cisco.com:
     ensure: present
-    profile: 'precise-x86_64'
+    profile: 'trusty-x86_64'
     interfaces:
       eth0:
         mac_address: 'aa:bb:cc:dd:ee:f0'
