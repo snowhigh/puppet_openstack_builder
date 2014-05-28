@@ -122,23 +122,6 @@ cobbler::dhcp_option_subnet: '255.255.255.0'
 # Cobbler server identifier
 cobbler::server_identifier: '192.168.242.10'
 
-
-
-# The subnet address of the subnet on which Cobbler should serve DHCP
-# addresses.
-node_subnet: '192.168.242.0'
-
-# The netmask of the subnet on which Cobbler should serve DHCP addresses.
-node_netmask: '255.255.255.0'
-
-# The default gateway that should be provided to DHCP clients that acquire
-# an address from Cobbler.
-node_gateway: '192.168.242.1'
-
-# The admin username and crypted password used to authenticate to Cobbler.
-admin_user: localadmin
-password_crypted: $6$UfgWxrIv$k4KfzAEMqMg.fppmSOTd0usI4j6gfjs0962.JXsoJRWa5wMz8yQk4SfInn4.WZ3L/MCt5u.62tHDGB36EhiKF1
-
 # Cobbler can instruct nodes being provisioned to start a Puppet agent
 # immediately upon bootup.  This is generally desirable as it allows
 # the node to immediately begin configuring itself upon bootup without
@@ -146,6 +129,8 @@ password_crypted: $6$UfgWxrIv$k4KfzAEMqMg.fppmSOTd0usI4j6gfjs0962.JXsoJRWa5wMz8y
 # purposes to prevent Puppet from starting automatically upon bootup.
 # If you want Puppet to run automatically on bootup, set this to true.
 # Otherwise, set it to false.
+
+# support for this to be added 
 autostart_puppet: true
 
 # If you are using Cisco UCS servers managed by UCSM, set the port on
