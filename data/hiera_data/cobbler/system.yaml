@@ -16,6 +16,7 @@ cobbler_systems:
         ip_address:  '10.0.0.4'
         netmask:     '255.255.255.0'
     kopts: 'netcfg/disable_autoconfig=true netcfg/dhcp_failed=true netcfg/confirm_static=true partman-auto/disk=/dev/sda'
+    power_type:    'ipmilan' #Cisco UCS is 'cisco_ucs'
     power_address: '1.1.1.1'
     power_user:    'someuser'
     power_password: 'somepass'
