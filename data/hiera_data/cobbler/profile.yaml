@@ -3,4 +3,4 @@ cobbler_profiles:
     ensure:      present
     distro:      'trusty-x86_64'
     nameservers: "$cobbler::nameservers"
-    kickstart:   '/var/lib/cobbler/kickstarts/ubuntu-server.preseed'
+    kickstart:   '/etc/cobbler/preseed/cisco-preseed'
