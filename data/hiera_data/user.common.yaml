@@ -134,13 +134,13 @@ cobbler::server_identifier: '192.168.242.10'
 autostart_puppet: true
 
 # preseeding information
-cobbler::diskpart: '/dev/sda'
+cobbler::diskpart: ['/dev/sda']
 cobbler::expert_disk: true
 cobbler::boot_disk: '/dev/sda'
 cobbler::root_part_size: 65536
 cobbler::enable_var: true
 cobbler::var_part_size: 432000
-cobbler::enable_vol_space: true
+cobbler::enable_var_space: true
 cobbler::ntp_server: '192.168.242.10'
 cobbler::time_zone: UTC
 cobbler::admin_user: 'localadmin'
