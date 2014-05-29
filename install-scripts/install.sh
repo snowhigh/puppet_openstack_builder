@@ -101,6 +101,7 @@ ntp_servers:
 build_node_name: ${build_server}
 coe::base::controller_hostname: "${build_server}"
 controller_internal_address: "${build_server_ip}"
+cobbler::server_ip: "${build_server_ip}"
 controller_public_address: "${build_server_ip}"
 controller_admin_address: "${build_server_ip}"
 controller_public_url: "${default_protocol}://${build_server_ip}:5000"
