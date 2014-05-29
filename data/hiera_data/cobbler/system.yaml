@@ -15,7 +15,7 @@ cobbler_systems:
         mac_address: 'aa:bb:cc:dd:ee:f2'
         ip_address:  '10.0.0.4'
         netmask:     '255.255.255.0'
-    kopts: 'preseed/url=http://10.0.0.1/cblr/svc/op/ks/system/somehost.cisco.com'
+    kopts: ''
     power_type:    'ipmilan' #Cisco UCS is 'cisco_ucs'
     power_address: '1.1.1.1'
     power_user:    'someuser'
