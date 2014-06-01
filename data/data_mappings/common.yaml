@@ -378,16 +378,6 @@ puppet_mysql_version:
   - ceilometer::db::mysql_module
   - nova::db::mysql::mysql_module
   - nova::mysql_module
-# Cisco plugin support
-#nexus_plugin:
-#  - neutron::plugins::cisco::nexus_plugin
-#vswitch_plugin:
-#  - neutron::plugins::cisco::vswitch_plugin
-#nexus_credentials:
-#  - coe::nexus::nexus_credentials
-#nexus_config:
-#  - coe::nexus::nexus_config
-
 # MySQL char set and collation order
 mysql_default_charset:
   - ceilometer::db::mysql::charset
@@ -405,3 +395,17 @@ mysql_default_collation:
   - keystone::db::mysql::collate
   - neutron::db::mysql::collate
   - nova::db::mysql::collate
+# Cisco plugin support
+#nexus_plugin:
+#  - neutron::plugins::cisco::nexus_plugin
+#vswitch_plugin:
+#  - neutron::plugins::cisco::vswitch_plugin
+#nexus_credentials:
+#  - coe::nexus::nexus_credentials
+#nexus_config:
+#  - coe::nexus::nexus_config
+# Cobbler install drive
+install_drive:
+  - coi::profiles::cobbler_server::diskpart
+  - cobbler::diskpart
+  - cobbler::ubuntu::preseed::diskpart
