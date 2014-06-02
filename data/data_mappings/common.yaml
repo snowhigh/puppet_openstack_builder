@@ -409,3 +409,7 @@ install_drive:
   - coi::profiles::cobbler_server::diskpart
   - cobbler::diskpart
   - cobbler::ubuntu::preseed::diskpart
+packages:
+  - coi::profiles::cobbler_server::packages
+  - cobbler::packages
+  - cobbler::ubuntu::preseed::packages

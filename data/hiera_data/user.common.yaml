@@ -146,6 +146,11 @@ password_crypted: $6$UfgWxrIv$k4KfzAEMqMg.fppmSOTd0usI4j6gfjs0962.JXsoJRWa5wMz8y
 # Otherwise, set it to false.
 autostart_puppet: true
 
+# Cobbler installs a minimal install of Ubuntu. Specify any additional
+# packages which should be part of the base install on top of the minimal
+# install set of packages
+packages: 'openssh-server vim vlan lvm2 ntp'
+
 # If you are using Cisco UCS servers managed by UCSM, set the port on
 # which Cobbler should connect to UCSM in order to power nodes off and on.
 # If set to 443, the connection will use SSL, which is generally
