@@ -425,3 +425,6 @@ packages:
   - cobbler::ubuntu::preseed::packages
 enable_promisc_vrrp:
   - cobbler::ubuntu::preseed::enable_promisc_vrrp
+disableml2:
+  - neutron::server::disableml2
+  - neutron::agents::ovs::disableml2

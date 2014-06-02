@@ -413,6 +413,11 @@ service_plugins:
 # Set the interface driver
 interface_driver: 'neutron.agent.linux.interface.OVSInterfaceDriver'
 
+# ml2 hack. Current packages have ml2 enabled, even if you do not
+# use the driver. This param corrects the configuration files.
+# This is enabled by default. If you are using ml2, change to false.
+disableml2: true
+
 # Set the external network bridge.
 # NOTE: If you change this, make sure to update the
 # bridge mapping in tenant_network_type/*.yaml
