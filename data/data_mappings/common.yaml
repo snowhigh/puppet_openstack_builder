@@ -409,3 +409,8 @@ install_drive:
   - coi::profiles::cobbler_server::diskpart
   - cobbler::diskpart
   - cobbler::ubuntu::preseed::diskpart
+# expert_disk mode in Ubuntu installs using Cobbler
+expert_disk:
+  - coi::profiles::cobbler_server::expert_disk
+  - cobbler::expert_disk
+  - cobbler::ubuntu::preseed::expert_disk

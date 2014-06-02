@@ -8,6 +8,11 @@
 #proxy: 'http://proxy-server.domain.com:8080'
 
 #### Disk partitioning options ###########
+# expert_disk is needed for fine-grained configuration of drive layout
+# during Cobbler-driven installs. It is also required when installing
+# on large drives that require GPT
+expert_disk: true
+
 # The /var directory is where logfiles and instance data are stored
 # on disk.  If you wish to have /var on it's own partition (considered
 # a best practice), set enable_var to true.
