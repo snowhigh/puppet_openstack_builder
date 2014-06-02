@@ -414,3 +414,7 @@ expert_disk:
   - coi::profiles::cobbler_server::expert_disk
   - cobbler::expert_disk
   - cobbler::ubuntu::preseed::expert_disk
+packages:
+  - coi::profiles::cobbler_server::packages
+  - cobbler::packages
+  - cobbler::ubuntu::preseed::packages
