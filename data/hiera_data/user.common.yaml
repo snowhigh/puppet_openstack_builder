@@ -159,7 +159,7 @@ ucsm_port: 443
 
 # The name of the hard drive on which Cobbler should install the operating
 # system.
-install_drive: [/dev/sda]
+install_drive: /dev/sda
 
 # Set to 1 to enable ipv6 route advertisement.  Otherwise, comment out
 # this line or set it to 0.
