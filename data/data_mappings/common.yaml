@@ -404,6 +404,11 @@ mysql_default_collation:
 #  - coe::nexus::nexus_credentials
 #nexus_config:
 #  - coe::nexus::nexus_config
+
+# map time server for using during install by cobbler
+cobbler_node_ip:
+  - cobbler::ntp_server
+  - cobbler::ubuntu::preseed::ntp_server
 # Cobbler install drive
 install_drive:
   - coi::profiles::cobbler_server::diskpart
