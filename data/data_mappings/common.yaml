@@ -413,3 +413,5 @@ packages:
   - coi::profiles::cobbler_server::packages
   - cobbler::packages
   - cobbler::ubuntu::preseed::packages
+enable_promisc_vrrp:
+  - cobbler::ubuntu::preseed::enable_promisc_vrrp

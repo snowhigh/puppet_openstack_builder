@@ -169,6 +169,11 @@ install_drive: [/dev/sda]
 # ethernet interfaces.
 #interface_bonding: true
 
+# Use the following directive to enable promisc mode in cobbler preseed
+# This may be needed in some HA installs to ensure that VRRP advertisements 
+# to work.
+enable_promisc_vrrp: false
+
 # The IP address on which vncserver proxyclient should listen.
 # This should generally be an address that is accessible via
 # horizon.  You can set it to an actual IP address (e.g. "192.168.1.1"),
