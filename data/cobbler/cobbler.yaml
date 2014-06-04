@@ -20,7 +20,7 @@ log_host=192.168.242.100 \
 netcfg/choose_interface=auto"
 
 node-global:
-  #power_type should be ipmilan for CIMC, or cisco_ucs for UCS-M
+  #power_type should be ipmilan for CIMC, or ucs for UCS-M
   power_type: "ipmilan"
   power_user: "admin"
   power_pass: "password"
@@ -58,7 +58,15 @@ build-server:
   # by default new added nodes are set to PXE boot
   # uncomment this line to force the added node to not PXE boot
   #netboot_enabled: "0"
+  #
+  # power_address is the CIMC or UCS-M instance managing the server
+  # For UCS-M installations using suborganizations, specify the
+  # suborg after the address, such as:
+  #   power_address: "192.168.2.101:org-CI"
   power_address: "192.168.2.101"
+  # For UCS-M, a power_id argument is also needed specifying the profile
+  # name of the instance in UCS-M
+  # power_id: "Build-Server.C1B2"
   profile: "trusty-x86_64"
   interfaces:
     eth0:
