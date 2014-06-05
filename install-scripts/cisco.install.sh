@@ -15,8 +15,8 @@ export install_type=deb
 ## Add Cisco repo
 cat > /etc/apt/sources.list.d/cisco-openstack-puppet-mirror_icehouse.list<<EOF
 # cisco-openstack-puppet-mirror_icehouse
-deb http://openstack-repo.cisco.com/openstack/puppet icehouse-proposed main
-deb-src http://openstack-repo.cisco.com/openstack/puppet icehouse-proposed main
+deb http://openstack-repo.cisco.com/openstack/puppet icehouse/snapshots/i.0 main
+deb-src http://openstack-repo.cisco.com/openstack/puppet icehouse/snapshots/i.0 main
 EOF
 
 # Add the signing key for the Cisco Puppet repo
