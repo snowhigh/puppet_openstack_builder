@@ -12,11 +12,19 @@ roles:
       - heat_all
       - "%{db_type}_database"
       - network_controller
+# For ML2, Uncomment this and comment above line
+#      - network_controller_ml2
+
   compute:
     class_groups:
       - nova_compute
+# For ML2, Uncomment this and comment above line
+#      - nova_compute_ml2
       - cinder_volume
       - ceilometer_compute
   network_controller:
     class_groups:
       - network_controller
+# For ML2, Uncomment this and comment above line
+#      - network_controller_ml2
+

@@ -406,6 +406,8 @@ enable_vpnaas: true
 
 # An array of Neutron service plugins to enable.
 service_plugins:
+# For ML2, uncomment this line
+#  - 'neutron.services.l3_router.l3_router_plugin.L3RouterPlugin'
   - 'neutron.services.loadbalancer.plugin.LoadBalancerPlugin'
   - 'neutron.services.firewall.fwaas_plugin.FirewallPlugin'
   - 'neutron.services.vpn.plugin.VPNDriverPlugin'
@@ -528,6 +530,7 @@ mysql::server::restart: true
 # 2.) Set the network_vlan_ranges to the vlan range you want to use
 #     in hiera_data/tenant_network_type/vlan.yaml if using vlans
 #     for tenant segmentation (as opposed to GRE).
+#NOTE: For monolythic plugin mode follow these steps:
 # 3.) Add these two lines to ../class_groups/network_controller.yaml:
 #     - "coe::nexus"
 #     - "neutron::plugins::cisco"
@@ -542,12 +545,14 @@ mysql::server::restart: true
 #     --config-file /etc/neutron/plugins/cisco/cisco_plugins.ini \
 #     --config-file /etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini
 
-
 # Use the Cisco plugin.  Note that we set this here rather than in
 # global_hiera_params because in most use cases we'll want to set up
 # both the Cisco plugin and the OVS plugin (and because the
 # Cisco plugin by itself is agentless).
 #neutron::core_plugin: 'neutron.plugins.cisco.network_plugin.PluginV2'
+
+# For ML2, uncomment this line
+#neutron::core_plugin: 'ml2'
 
 # The Nexus sub-plugin to use.
 #nexus_plugin: 'neutron.plugins.cisco.nexus.cisco_nexus_plugin_v2.NexusPlugin'
@@ -562,6 +567,12 @@ mysql::server::restart: true
 # - 'switch2 IP address/username/password'
 #nexus_credentials:
 #  - '172.18.117.27/admin/password'
+
+
+# If using ML2, set the mech drivers
+ml2_mechanism_drivers: ['openvswitch', 'l2population']
+# If using Cisco plugin with ML2 + OVS
+#ml2_mechanism_drivers: ['openvswitch', 'l2population', 'cisco_nexus']
 
 # Switch configuration information.  This is a hash for each switch in
 # your topology.  The format for each entry is:
