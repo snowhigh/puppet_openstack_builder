@@ -27,6 +27,8 @@ roles:
       - heat_all
       - "%{db_type}_database"
       - provider_network_controller
+# For ML2, Uncomment this and comment above line
+#      - provider_network_controller_ml2
       - test_file
       - ceph_mon
   controller_without_mon:
@@ -48,6 +50,8 @@ roles:
       - heat_all
       - "%{db_type}_database"
       - provider_network_controller
+# For ML2, Uncomment this and comment above line
+#      - provider_network_controller_ml2
       - test_file
   load_balancer:
     classes:
@@ -60,6 +64,8 @@ roles:
       - cinder::setup_test_volume
     class_groups:
       - nova_compute
+# For ML2, Uncomment this and comment above line
+#      - nova_compute_ml2
       - cinder_volume
       - ceilometer_compute
       - ceph_osd
@@ -70,6 +76,8 @@ roles:
       - cinder::setup_test_volume
     class_groups:
       - nova_compute
+# For ML2, Uncomment this and comment above line
+#      - nova_compute_ml2
       - cinder_volume
       - ceilometer_compute
   ceph_mon:

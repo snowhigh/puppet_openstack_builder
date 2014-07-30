@@ -25,6 +25,8 @@ roles:
       - heat_all
       - "%{db_type}_database"
       - network_controller
+# For ML2, Uncomment this and comment above line
+#      - network_controller_ml2
       - test_file
   swift_proxy:
     classes:
