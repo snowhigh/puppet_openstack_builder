@@ -19,7 +19,7 @@ fi
 
 # Default to using the Cisco install.
 # To override this, comment out the next line
-export vendor=cisco
+export vendor=gemini
 
 # Install type to use to get the puppet modules
 # Options: git(default) or deb
